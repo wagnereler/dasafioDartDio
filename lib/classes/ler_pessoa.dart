@@ -14,10 +14,22 @@ class LeitorDePessoa {
   }
 
   static TipoSexo lerSexo() {
-    String sexoStr = lerEntrada('Sexo (M/F): ').toString();
-    return sexoStr.toLowerCase() == 'm'
-        ? TipoSexo.masculino
-        : TipoSexo.feminino;
+    String sexoStr;
+    do {
+      sexoStr = lerEntrada('Sexo (M/F): ').toString();
+      sexoStr = sexoStr.trim().toLowerCase();
+      try {
+        if (sexoStr == 'm') {
+          return TipoSexo.masculino;
+        } else if (sexoStr == 'f') {
+          return TipoSexo.feminino;
+        } else {
+          throw FormatException();
+        }
+      } catch (e) {
+        print('Entrada inválida. Digite M ou F.');
+      }
+    } while (true);
   }
 
   static Pessoa lerPessoa() {
